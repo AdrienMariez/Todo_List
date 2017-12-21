@@ -1,0 +1,1 @@
+function appendToList(){"use strict";var e=document.getElementById("taskList"),t=document.createElement("tr"),n=document.createElement("td");n.innerHTML=document.getElementById("task").value,t.appendChild(n),e.children[0].appendChild(t)}
