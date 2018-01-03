@@ -43,7 +43,7 @@ function addFunction() {
     var currentDate = now.toLocaleDateString("fr-FR");
     //format the date & so it's actually readable
 
-    var contentLi = "<li class=\"li\"><input name=\"interest\" type=\"checkbox\" id=\"toDoCheck"+a+"\" class=\"check\"  value=\"toDoCheck\" onchange=\"removeTask(this)\"><label for=\"toDoCheck"+a+"\" class=\"listItem\">"+inputValue+"</label>  "+currentHour+"  "+currentDate+"  <a id=\""+a+"\" class=\"removeBtn waves-effect waves-light\" href=\"#\" onclick=\"remove(this)\">remove</a></li>"
+    var contentLi = "<li id=\"li"+a+"\" class=\"li\" "+a+"\"><input name=\"interest\" type=\"checkbox\" id=\"toDoCheck"+a+"\" class=\"check\"  value=\"toDoCheck\" onchange=\"removeTask(this)\"><label for=\"toDoCheck"+a+"\" class=\"listItem\">"+inputValue+"</label>  "+currentHour+"  "+currentDate+"  <a class=\"removeBtn waves-effect waves-light\" "+a+"\" href=\"#\" onclick=\"remove(this)\">remove</a></li>"
     //IMPORTANT : creates the visual value of the whole li, adding the input content, the checkbox, the hour, date and finally the remove button
     list.insertAdjacentHTML('beforeend', contentLi);
     //and this inserts all this string in the ul, since it's a li, it works
@@ -80,15 +80,21 @@ function removeTask(checkboxElem) {
       alert ("La tâche a été remise en cours");
         //else gives what happens if the task is back in To Do state (unchecked)
     }
-  }
+}
 
 function remove(link) { 
     //function for when you click on a remove button, it removes the parent object (in this case, the whole LI)
     link.parentNode.parentNode.removeChild(link.parentNode);
 
-    var idRemove = link.id;
+    var classRemove = link.class;
+
+    //NEED TO WORK HERE 
+//    var classToRemove = document.getElementById("li"+classRemove).getElementsByTagName("li");
+
+//    var storeToRemove = classToRemove.value;
 
     localStorage.removeItem("toDoCheck"+idRemove);
+//    localStorage.removeItem(storeToRemove);
 }
 
 var checkboxes = document.getElementById("toDoList").getElementsByTagName("input");
