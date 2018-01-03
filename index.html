@@ -9,37 +9,42 @@
     <link rel="stylesheet" href="./dist/css/style.css">
 </head>
 <body>
-
+<div class="mainContainer">
     <div class="boxContainer">
         <div class="boxInput">
             <form>
-                <input type="text" id="task"   placeholder="Indiquez une tâche à ajouter ici.">
+                <input type="text" id="taskInput"   placeholder="Indiquez une tâche à ajouter ici.">
 
-                <button class="btn waves-effect waves-light" type="submit" name="action" onclick="appendToList()">Ajouter
+                <button class="btn waves-effect waves-light" id="buttonAdd" type="button" name="action" onclick="addFunction()">Ajouter
                 </button>
             </form>
         </div>
-        <div class="boxTodoList">
-            <table>
-                <thead>
-                    <tr>
-                        <th>x</th>
-                        <th>x</th>
-                    </tr>
-                </thead>
-                
-                <tbody id="taskList">
-                    <tr>
-                        <td>x</td>
-                        <td>x</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="boxToDoList">
+            <ul id="toDoList">
+                <!--<li>
+                    <input type="checkbox" id="toDoCheck"  class="check" name="interest" value="toDoCheck">
+                    <label for="toDoCheck" class="listItem">task1</label>
+                    <a class="removeBtn waves-effect waves-light" href="#" name="action" onclick="remove(this)">remove</a>
+                </li>-->
+            </ul>
         </div>
     </div>
 
+   <div class="filtersContainer">
+        <header>
+            Filtres :
+        </header>
+        <div class="filtersContent">
+            <button id="filterButtonOk" class="filtersButtons" type="button" onclick="filterOk()">Afficher uniquement les tâches accomplies</button>
+
+            <button id="filterButtonNot" class="filtersButtons" type="button" onclick="filterNot()">Afficher uniquement les tâches à effectuer</button>
+
+            <button id="filterButtonAll" class="filtersButtons" type="button" onclick="filterAll()">Afficher toutes les tâches</button>
+        </div>
+   </div> 
+</div>
     <script src="./dist/js/jquery.min.js"></script>
-    <script src="./dist/js/materialize.min.js"></script>    
+    <script src="./dist/js/materialize.min.js"></script>
     <script src="./dist/js/app.js"></script>
 </body>
 </html>

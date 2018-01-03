@@ -1,26 +1,74 @@
-.boxContainer{
-    margin-left: 20%;
-    margin-right: 50%;
-    height: 300px;
-    .boxInput{
-        margin: 15px;
-        input{
-            width: 100%;
-            height: 30px;
-            border: 3px;
-            border-radius: 5px;
-            border-color: darkslategray;
-            background-color: lightblue;
-            color: black;
+.mainContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 80%;
+    margin-top: 20px;
+    .boxContainer{
+        border: 3px;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: gray;
+        .boxInput{
+            margin: 15px;
+            input{
+                width: 100%;
+                height: 30px;
+                border: 3px;
+                border-radius: 5px;
+                border-color: darkslategray;
+                background-color: lightblue;
+                color: black;
+            }
+            button{
+                width: 100%;
+                height: 30px;
+                background-color: lightblue;
+                color: black;
+            }
         }
-        button{
-            width: 100%;
-            height: 30px;
-            background-color: lightblue;
-            color: black;
+        .boxToDoList{
+            margin: 15px;
+            #toDoList{
+                li{
+                    display: block;
+                }
+                input:checked + label {
+                    text-decoration: line-through;
+                }
+            }
+            .removeBtn{
+                width: 15%;
+                height: 15px;
+                background-color: rgb(251, 117, 117);
+                color: black;
+                font-size: 10px;
+            }
         }
     }
-    .boxTodoList{
-        margin: 15px;
+    .filtersContainer{
+        margin-left: 20%;
+        width: 30%;
+        border: 3px;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: gray;
+        height: 300px;
+        header{
+            margin-left: 20%;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+        .filtersContent{
+            display: flex;
+            flex-direction: column;
+            .filtersButtons{
+                margin-top: 30px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
     }
 }

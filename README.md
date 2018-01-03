@@ -9,11 +9,11 @@ Réaliser une todo list permettant d'ajouter des choses à se rappeler. Une fois
 
 
 # User stories
-* En tant qu'utilisateur, je peux ajouter une tâche à faire.
-* En tant qu'utilisateur, je peux définir une tâche comme faite.
-* En tant qu'utilisateur, je peux filtrer la liste de tâches pour ne voir que les tâches faites.
-* En tant qu'utilisateur, je peux filtrer la liste de tâches pour ne voir que les tâches à faire.
-* En tant qu'utilisateur, je peux filtrer la liste de tâches pour voir toutes les tâches.
+*** En tant qu'utilisateur, je peux ajouter une tâche à faire.
+*** En tant qu'utilisateur, je peux définir une tâche comme faite.
+*** En tant qu'utilisateur, je peux filtrer la liste de tâches pour ne voir que les tâches faites.
+*** En tant qu'utilisateur, je peux filtrer la liste de tâches pour ne voir que les tâches à faire.
+*** En tant qu'utilisateur, je peux filtrer la liste de tâches pour voir toutes les tâches.
 
 # Organisation:
 ```
