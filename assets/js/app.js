@@ -1,10 +1,41 @@
 //alert("bienvenue dans la todo list des vrais !");
 
-var a = 0;
 //creates an INT starting at 0 to count the LI that will be created
+var currentTasks = "current tasks"
+
+function loadLocal() {
+    // var localTotal = localStorage.length;
+    // console.log(localTotal);
+        //this can be useful to count the localstorage items, unused but kept for learning purposes
+    co=0
+    //I create a blank counter
+
+    for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+            //Now we check all items in the local storage
+        co++;
+            //for each one the counter is incremented
+
+        var val1 = JSON.parse(localStorage.getItem('toDoCheck'+co));
+            //now I search only for the keys with toDoCheck, it's a little bit cumbersome, but it actually works
+    
+        var val2 = val1["liContent"];  
+            //now looking for the values licontent, the rest is just html magic
+
+        var ul = document.getElementById('toDoList');
+
+        ul.insertAdjacentHTML('beforeend', val2);  
+                
+      }
+}
 
 function addFunction() {
     //function : when the user click on "Ajouter", the input text is displayed 
+
+    if(currentTasks in localStorage){
+        var a = JSON.parse(localStorage.getItem(currentTasks));
+    } else {
+        var a = 0;
+    }
 
     var inputValue = document.getElementById("taskInput").value;
     //gets the value set by the user in the input
@@ -23,8 +54,11 @@ function addFunction() {
     } else {
     //else, set the user input in a localstorage, as val/val
     inputValue.value = a;
+//    storage.removeItem("current tasks");
     a++;
     //the "a" val that started is incremented with each LI created, so each LI has a different INT value
+    localStorage.setItem("current tasks", a);
+
     var inputValue = document.getElementById("taskInput").value;
     //gets the input content
     localStorage.setItem(inputValue, "task_value");
@@ -43,7 +77,8 @@ function addFunction() {
     var currentDate = now.toLocaleDateString("fr-FR");
     //format the date & so it's actually readable
 
-    var contentLi = "<li id=\"li"+a+"\" class=\"li\" "+a+"\"><input name=\"interest\" type=\"checkbox\" id=\"toDoCheck"+a+"\" class=\"check\"  value=\"toDoCheck\" onchange=\"removeTask(this)\"><label for=\"toDoCheck"+a+"\" class=\"listItem\">"+inputValue+"</label>  "+currentHour+"  "+currentDate+"  <a class=\"removeBtn waves-effect waves-light\" "+a+"\" href=\"#\" onclick=\"remove(this)\">remove</a></li>"
+    var contentLi = "<li id=\"li"+a+"\" name=\""+a+"\"><input name=\"interest\" type=\"checkbox\" id=\"toDoCheck"+a+"\" class=\"check\" onchange=\"removeTask(this)\"><label id=\"label"+a+"\" name=\""+a+"\" for=\"toDoCheck"+a+"\" class=\"listItem\">"+inputValue+"</label>  "+currentHour+"  "+currentDate+"</li>"
+    //<a name=\""+a+"\" class=\"removeBtn waves-effect waves-light\" "+a+"\" href=\"#\" onclick=\"remove(this)\">remove</a>
     //IMPORTANT : creates the visual value of the whole li, adding the input content, the checkbox, the hour, date and finally the remove button
     list.insertAdjacentHTML('beforeend', contentLi);
     //and this inserts all this string in the ul, since it's a li, it works
@@ -51,18 +86,25 @@ function addFunction() {
     //the whole li is stored in locale storage, to be displayed again, I dunno.
 
 //        var value = [inputValue,n]
-        var value = { input: inputValue, time: n, liContent: contentLi}​​​​​​​;
+        var value = {
+            input: inputValue,
+            time: n,
+            liContent: contentLi
+        }​​​​​​​;
+
         localStorage.setItem("toDoCheck"+a, JSON.stringify(value));
     }
 }
 
 function removeTask(checkboxElem) {
         //when the task is checked as completed, we click on the checkbox
+    var idCheck = checkboxElem.id;
+        //find the id of the checkbox
+
     if (checkboxElem.checked) {
         //if the checkbox is really checked
 
-        var idCheck = checkboxElem.id;
-            //find the id of the checkbox
+        checkboxElem.setAttribute("checked", "checked");
 
         var hourRemoved = new Date();
             //create a new current date (to know when it was set as completed)
@@ -76,39 +118,61 @@ function removeTask(checkboxElem) {
             //difference in ms      
         alert("Tâche complétée en "+timeDiff/1000+" secondes");
             //difference in seconds
-    } else {
-      alert ("La tâche a été remise en cours");
-        //else gives what happens if the task is back in To Do state (unchecked)
+
     }
+    else {
+        checkboxElem.removeAttribute("checked");
+        alert ("La tâche a été remise en cours");
+            //else gives what happens if the task is back in To Do state (unchecked)
+    }
+    var liUpdate = checkboxElem.parentNode.outerHTML;
+console.log(liUpdate);
+    var liUpdated = JSON.parse(localStorage.getItem(idCheck));
+
+    liUpdated.liContent = liUpdate;
+
+    localStorage.setItem(idCheck, JSON.stringify(liUpdated));
+
+
+    //var liUpdate = checkboxElem.parentNode.innerHTML;
+
+    //var liUpdated = JSON.parse(localStorage.getItem(idCheck));
+    //console.log(liUpdated);
+    //idCheck.liContent = liUpdate;
 }
 
-function remove(link) { 
+//function remove(link) { 
+    //YE OLDE CODE THAT WOULD NOT WORK
     //function for when you click on a remove button, it removes the parent object (in this case, the whole LI)
-    link.parentNode.parentNode.removeChild(link.parentNode);
+//    link.parentNode.parentNode.removeChild(link.parentNode);
+//Now I need to remove both local storage values
+//var idCheck = link.name;
+//localStorage.removeItem("toDoCheck"+idCheck);
+//OK POUR UN
+//var labelx = ".label"+idCheck;
+//console.log(labelx);
+//}
 
-    var classRemove = link.class;
-
-    //NEED TO WORK HERE 
-//    var classToRemove = document.getElementById("li"+classRemove).getElementsByTagName("li");
-
-//    var storeToRemove = classToRemove.value;
-
-    localStorage.removeItem("toDoCheck"+idRemove);
-//    localStorage.removeItem(storeToRemove);
+function remove() {
+    var list = document.getElementById("toDoList");
+    while (list.hasChildNodes()) {  
+        list.removeChild(list.firstChild);
+    } 
+    window.localStorage.clear();
 }
 
 var checkboxes = document.getElementById("toDoList").getElementsByTagName("input");
 //search all checkboxes in the page
 function filterOk(input) {
-//   var checkboxesChecked = [];
-    //create an empty table (optionnal)
+            //var checkboxesChecked = [];
+                //create an empty table (optionnal)
 
     for (var i=0; i<checkboxes.length; i++) {
     // loop over all checkboxes in the page
        if (!checkboxes[i].checked) {
         // And stick the checked ones onto an array...
-//            checkboxesChecked.push(checkboxes[i]);
-            //but allows to see if the value is correctly set (optionnal)
+                //checkboxesChecked.push(checkboxes[i]);
+                    //but allows to see if the value is correctly set (optionnal)
             checkboxes[i].parentNode.style.display='none';
                 //all checkboxes in the array have their parent set to display none !
         }

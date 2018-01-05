@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./dist/css/materialize.min.css">
     <link rel="stylesheet" href="./dist/css/style.css">
 </head>
-<body>
+<body onload="loadLocal()">
 <div class="mainContainer">
     <div class="boxContainer">
         <div class="boxInput">
@@ -40,6 +40,9 @@
             <button id="filterButtonNot" class="filtersButtons" type="button" onclick="filterNot()">Afficher uniquement les tâches à effectuer</button>
 
             <button id="filterButtonAll" class="filtersButtons" type="button" onclick="filterAll()">Afficher toutes les tâches</button>
+
+            <button class="btn waves-effect waves-light" id="buttonRm" type="button" name="action" onclick="remove()">Vider la liste
+            </button>
         </div>
    </div> 
 </div>

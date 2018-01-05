@@ -35,6 +35,9 @@
                 li{
                     display: block;
                 }
+                label {
+                    color: black;
+                }
                 input:checked + label {
                     text-decoration: line-through;
                 }
@@ -55,7 +58,7 @@
         border-radius: 5px;
         border-style: solid;
         border-color: gray;
-        height: 300px;
+        height: 350px;
         header{
             margin-left: 20%;
             margin-top: 20px;
@@ -68,6 +71,11 @@
                 margin-top: 30px;
                 margin-left: 10px;
                 margin-right: 10px;
+            }
+            #buttonRm{
+                margin-top: 40px;
+                width: 100%;
+                background-color: rgb(238, 90, 90);
             }
         }
     }
