@@ -69,8 +69,7 @@ function addFunction() {
     var now = new Date();
     //gets the current date and hour to display
     //and below, the current date and hour is stored in milliseconds to be reused later to know how long it took to complete it.
-    var dnow = new Date();
-    var n = dnow.getTime();
+    var n = now.getTime();
 //    localStorage.setItem("hourAdded"+a, n);
 
     var currentHour = now.toLocaleTimeString("fr-FR");
@@ -78,6 +77,8 @@ function addFunction() {
     //format the date & so it's actually readable
 
     var contentLi = "<li id=\"li"+a+"\" name=\""+a+"\"><input name=\"interest\" type=\"checkbox\" id=\"toDoCheck"+a+"\" class=\"check\" onchange=\"removeTask(this)\"><label id=\"label"+a+"\" name=\""+a+"\" for=\"toDoCheck"+a+"\" class=\"listItem\">"+inputValue+"</label>  "+currentHour+"  "+currentDate+"</li>"
+
+
     //<a name=\""+a+"\" class=\"removeBtn waves-effect waves-light\" "+a+"\" href=\"#\" onclick=\"remove(this)\">remove</a>
     //IMPORTANT : creates the visual value of the whole li, adding the input content, the checkbox, the hour, date and finally the remove button
     list.insertAdjacentHTML('beforeend', contentLi);
